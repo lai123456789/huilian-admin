@@ -1,0 +1,35 @@
+diff --git a/node_modules/vxe-table/lib/table/src/methods.js b/node_modules/vxe-table/lib/table/src/methods.js
+index 96c048d..89df66a 100644
+--- a/node_modules/vxe-table/lib/table/src/methods.js
++++ b/node_modules/vxe-table/lib/table/src/methods.js
+@@ -2647,8 +2647,8 @@ var Methods = {
+                   }
+                 }
+                 if (isClearActived ||
+-                // 如果点击了当前表格之外
+-                !getEventTargetNode(evnt, $el).flag) {
++                  // 如果点击了当前表格之外
++                  !getEventTargetNode(evnt, $el).flag) {
+                   setTimeout(function () {
+                     return _this27.clearEdit(evnt);
+                   });
+@@ -2923,8 +2923,8 @@ var Methods = {
+             } else if (isBack && keyboardOpts.isArrow && treeConfig && (rowOpts.isCurrent || highlightCurrentRow) && currentRow) {
+               // 如果树形表格回退键关闭当前行返回父节点
+               var _XEUtils$findTree = _xeUtils.default.findTree(_this29.afterFullData, function (item) {
+-                  return item === currentRow;
+-                }, treeOpts),
++                return item === currentRow;
++              }, treeOpts),
+                 parentRow = _XEUtils$findTree.parent;
+               if (parentRow) {
+                 evnt.preventDefault();
+@@ -3105,7 +3105,7 @@ var Methods = {
+     var cell = evnt.currentTarget;
+     this.handleTargetEnterEvent(tooltipStore.column !== column || tooltipStore.row !== row);
+     if ((0, _utils.isEnableConf)(editConfig)) {
+-      if (editOpts.mode === 'row' && actived.row === row || actived.row === row && actived.column === column) {
++      if ((editOpts.mode === 'row' && actived.row === row) && (actived.row === row && actived.column === column)) {
+         return;
+       }
+     }

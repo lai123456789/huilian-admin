@@ -1,0 +1,105 @@
+{
+  "name": "scp-ui-erp",
+  "version": "2.0.0",
+  "description": "慧链科技erp后台管理端",
+  "author": "khan97z <1299158739@qq.com>",
+  "scripts": {
+    "dev": "vue-cli-service serve",
+    "lint": "eslint --ext .js,.vue src && stylelint src/**/*.{html,vue,css,sass,scss} --fix",
+    "build:prod": "vue-cli-service build",
+    "build:stage": "vue-cli-service build --mode staging",
+    "preview": "node build/index.js --preview",
+    "test:unit": "jest --clearCache && vue-cli-service test:unit",
+    "test:ci": "npm run lint && npm run test:unit",
+    "prepare": "husky install",
+    "postinstall": "patch-package"
+  },
+  "dependencies": {
+    "@wangeditor/editor": "^5.1.1",
+    "@wangeditor/editor-for-vue": "^1.0.1",
+    "axios": "0.18.1",
+    "bignumber.js": "^9.0.2",
+    "core-js": "3.6.5",
+    "crypto-js": "^4.1.1",
+    "dayjs": "^1.11.3",
+    "echarts": "^5.3.3",
+    "element-ui": "2.15.10",
+    "file-saver": "2.0.1",
+    "fuse.js": "3.4.4",
+    "image-conversion": "^2.1.1",
+    "nprogress": "0.2.0",
+    "path-to-regexp": "2.4.0",
+    "querystring": "^0.2.1",
+    "throttle-debounce": "^1.0.1",
+    "vue": "2.6.14",
+    "vue-json-editor": "^1.4.3",
+    "vue-quill-editor": "^3.0.6",
+    "vue-router": "3.0.2",
+    "vuedraggable": "^2.24.3",
+    "vuex": "3.1.0",
+    "vxe-table": "3.6.8",
+    "xe-clipboard": "^1.10.2",
+    "xe-utils": "^3.5.4",
+    "xlsx": "^0.14.3"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.16.7",
+    "@babel/plugin-proposal-optional-chaining": "^7.16.7",
+    "@commitlint/cli": "12.1.4",
+    "@commitlint/config-conventional": "12.1.4",
+    "@vue/cli-plugin-babel": "4.4.4",
+    "@vue/cli-plugin-eslint": "4.4.4",
+    "@vue/cli-plugin-unit-jest": "4.4.4",
+    "@vue/cli-service": "4.4.4",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "autoprefixer": "9.5.1",
+    "babel-eslint": "10.1.0",
+    "babel-jest": "23.6.0",
+    "babel-plugin-dynamic-import-node": "2.3.3",
+    "compression-webpack-plugin": "3.1.0",
+    "eslint": "6.7.2",
+    "eslint-plugin-vue": "6.2.2",
+    "husky": "7.0.1",
+    "lint-staged": "^11.1.2",
+    "patch-package": "^6.5.0",
+    "prettier": "2.7.0",
+    "sass": "1.39.0",
+    "sass-loader": "8.0.2",
+    "script-ext-html-webpack-plugin": "2.1.3",
+    "script-loader": "0.7.2",
+    "style-resources-loader": "^1.4.1",
+    "stylelint": "13.13.1",
+    "stylelint-config-standard": "22.0.0",
+    "stylelint-order": "4.1.0",
+    "stylelint-scss": "3.21.0",
+    "svg-sprite-loader": "4.1.3",
+    "vue-cli-plugin-style-resources-loader": "^0.1.5",
+    "vue-template-compiler": "2.6.14"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "engines": {
+    "node": ">=8.9",
+    "npm": ">= 3.0.0"
+  },
+  "keywords": [
+    "vue"
+  ],
+  "lint-staged": {
+    "*.{js,vue}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{html,scss,vue,css}": [
+      "stylelint --fix",
+      "git add"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    }
+  }
+}

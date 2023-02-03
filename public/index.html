@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_2499479_122jlzzr56gd.css">
+  <!-- <script type="text/javascript">
+    function browserVersion() {
+      var userAgent = navigator.userAgent; // 取得浏览器的userAgent字符串 
+      var isFirefox = userAgent.indexOf("Firefox") > -1; // Firefox浏览器
+      var isChrome = userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Edge") == -1 && userAgent.indexOf("OPR") == -1; // Chrome浏览器
+      // var isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") == -1 && userAgent.indexOf("Edge") == -1 && userAgent.indexOf("OPR") == -1; //Safari浏览器
+      if (isFirefox) {
+        return 'Firefox:' + userAgent.split('Firefox/')[1].split('.')[0]
+      } else if (isChrome) {
+        return 'Chrome:' + userAgent.split('Chrome/')[1].split('.')[0]
+      } else
+      // if (isSafari) {
+      //   return 'Safari:'; + userAgent.split('Safari/')[1].split('.')[0];
+      // } else 
+      {
+        return void 0
+      }
+    }
+    // 页面展示内容
+    function contentStr() {
+      var str = '检测到您当前的使用的浏览器或者浏览器版本过低无法使用此系统';
+      var str2 = "推荐使用新版本的:<a href='https://www.google.cn/intl/zh-CN/chrome/' target='_blank' style='color:blue;'>谷歌浏览器</a>, "
+        + "<a href='https://www.firefox.com.cn/' target='_blank' style='color:blue;'>火狐浏览器</a>"
+      document.writeln("<pre style='text-align:center;color:#fff;background-color:#0cc; height:100%;border:0;position:fixed;top:0;left:0;width:100%;z-index:1234;margin:0;'>" +
+        "<h2 style='padding-top:200px;margin:0'><strong>" + str + "<br/></strong></h2><h2>" +
+        str2 + "</pre>")
+      if (!!(window.attachEvent && !window.opera)) { documen.execCommand('stop') }
+      else { window.stop() }
+    }
+    (function (window) {
+      var limitObj = {
+        'Firefox': 100,
+        'Chrome': 100,
+        // 'Safari': 15
+      }
+      const vers = browserVersion()
+      var browserVersionStr = vers ? vers.split(':') : false
+
+      if (browserVersionStr) {
+        var name = browserVersionStr[0]
+        var version = browserVersionStr[1]
+
+        if (!limitObj[name] || limitObj[name] && version < limitObj[name]) {
+          contentStr()
+        }
+      } else {
+        contentStr()
+      }
+
+    })(window)
+  </script> -->
+  <style>
+    .loading-mask {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      background: #fff;
+      user-select: none;
+      z-index: 9999;
+      overflow: hidden;
+    }
+
+    .loading-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -100%);
+    }
+
+    .loading-dot {
+      animation: antRotate 1.2s infinite linear;
+      transform: rotate(45deg);
+      position: relative;
+      display: inline-block;
+      font-size: 64px;
+      width: 64px;
+      height: 64px;
+      box-sizing: border-box;
+    }
+
+    .loading-dot i {
+      width: 22px;
+      height: 22px;
+      position: absolute;
+      display: block;
+      background-color: #1890ff;
+      border-radius: 100%;
+      transform: scale(0.75);
+      transform-origin: 50% 50%;
+      opacity: 0.3;
+      animation: antSpinMove 1s infinite linear alternate;
+    }
+
+    .loading-dot i:nth-child(1) {
+      top: 0;
+      left: 0;
+    }
+
+    .loading-dot i:nth-child(2) {
+      top: 0;
+      right: 0;
+      -webkit-animation-delay: 0.4s;
+      animation-delay: 0.4s;
+    }
+
+    .loading-dot i:nth-child(3) {
+      right: 0;
+      bottom: 0;
+      -webkit-animation-delay: 0.8s;
+      animation-delay: 0.8s;
+    }
+
+    .loading-dot i:nth-child(4) {
+      bottom: 0;
+      left: 0;
+      -webkit-animation-delay: 1.2s;
+      animation-delay: 1.2s;
+    }
+
+    @keyframes antRotate {
+      to {
+        -webkit-transform: rotate(405deg);
+        transform: rotate(405deg);
+      }
+    }
+
+    @-webkit-keyframes antRotate {
+      to {
+        -webkit-transform: rotate(405deg);
+        transform: rotate(405deg);
+      }
+    }
+
+    @keyframes antSpinMove {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @-webkit-keyframes antSpinMove {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+  <title>
+    <%= webpackConfig.name %>
+  </title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <!-- loading -->
+  <div id="app-loading" class="loading-mask" style="display: block;">
+    <div class="loading-wrapper">
+      <span class="loading-dot loading-dot-spin">
+        <i></i><i></i><i></i><i></i>
+      </span>
+    </div>
+  </div>
+</body>
+
+</html>

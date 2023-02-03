@@ -1,0 +1,5 @@
+@import './variables.scss';
+:root {
+  --color-primary: #{$--color-primary};
+  --color-light-primary: #{$--light-color-primary};
+}

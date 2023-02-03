@@ -1,0 +1,129 @@
+<!-- 报关单企业资质承诺 -->
+<script>
+import { updatePublicValueSysPublicParam, publicValueSysPublicParamByPublicKey } from '@/api/admin/sys-public-param'
+import { getDataDictionary } from '@/api/admin/dicts'
+import { clone } from 'xe-utils'
+import constant from '@/constant'
+import enums from '@/enums'
+
+const form = {
+  importName: '',
+  importCode: '',
+  exportName: '',
+  exportCode: ''
+}
+
+export default {
+  name: 'CustomsQualifPromise',
+  props: {
+    value: {
+      type: Boolean,
+      default: false
+    },
+    tableRow: {
+      type: Object,
+      default: () => ({})
+    },
+    templateKey: String,
+    title: String,
+    reLoad: {
+      type: Function,
+      default: () => () => {}
+    }
+  },
+  data() {
+    return {
+      enums,
+      constant,
+      // ----------- 固定定义 -----------
+      visible: this.value,
+      // ----------- 固定定义 -----------
+      form: clone(form, true),
+      rules: {
+        importName: [{ required: true, message: '企业资质名称(进口)必填', trigger: 'blur' }],
+        importCode: [{ required: true, message: '企业资质代码(进口)必填', trigger: 'blur' }],
+        exportName: [{ required: true, message: '企业资质名称(出口)必填', trigger: 'blur' }],
+        exportCode: [{ required: true, message: '企业资质代码(出口)必填', trigger: 'blur' }]
+      },
+      dicts: {}
+    }
+  },
+  watch: {
+    // ----------- 固定定义 -----------
+    value(newValue) {
+      this.visible = newValue
+    },
+    visible(newValue) {
+      this.$emit('input', newValue)
+    }
+    // ----------- 固定定义 -----------
+  },
+  mounted() {
+    // 点进来立马的触发一下弹窗高度刷新
+    this.$refs.dialogRef.handleResize()
+    this.form = clone(form, true)
+    Promise.all([getDataDictionary([]), publicValueSysPublicParamByPublicKey(this.templateKey)]).then(([dicts, info]) => {
+      this.dicts = dicts
+      Object.assign(this.form, info.data)
+    })
+  },
+  methods: {
+    handleSave(done) {
+      this.getFormInstance().validate((valid, invalidFields) => {
+        if (valid) {
+          updatePublicValueSysPublicParam({ publicKey: this.templateKey, publicValue: JSON.stringify(this.form) })
+            .then(() => {
+              this.$message.success('操作成功')
+              this.visible = false
+              done()
+              // 刷新表格的时候，保存之前选中的数据
+              this.reLoad(true)
+            })
+            .catch(() => {
+              done()
+            })
+        } else {
+          // 通过 el-message 的形式展示错误信息
+          this.getFormInstance().useErrorByMessage(invalidFields)
+          done()
+        }
+      })
+    },
+    getFormInstance() {
+      return this.$refs.formRef
+    }
+  }
+}
+</script>
+
+<template>
+  <base-dialog ref="dialogRef" :visible.sync="visible" width="600px" :title="title" @save="handleSave">
+    <base-form ref="formRef" :model="form" :rules="rules" label-width="135px" size="mini">
+      <base-row>
+        <base-col :span="24">
+          <base-form-item label="企业资质名称(进口)" prop="importName">
+            <base-input v-model="form.importName" placeholder="请输入企业资质名称(进口)" />
+          </base-form-item>
+        </base-col>
+
+        <base-col :span="24">
+          <base-form-item label="企业资质代码(进口)" prop="importCode">
+            <base-input v-model="form.importCode" placeholder="请输入企业资质代码(进口)" />
+          </base-form-item>
+        </base-col>
+
+        <base-col :span="24">
+          <base-form-item label="企业资质代码(出口)" prop="exportName">
+            <base-input v-model="form.exportName" placeholder="请输入企业资质名称(出口)" />
+          </base-form-item>
+        </base-col>
+
+        <base-col :span="24">
+          <base-form-item label="企业资质代码(出口)" prop="exportCode">
+            <base-input v-model="form.exportCode" placeholder="请输入企业资质代码(出口)" />
+          </base-form-item>
+        </base-col>
+      </base-row>
+    </base-form>
+  </base-dialog>
+</template>

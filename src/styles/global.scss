@@ -1,0 +1,8 @@
+@import './common.scss';
+
+/* 修改全局表单组件 disabled 状态字体颜色 */
+.el-textarea.is-disabled .el-textarea__inner,
+.el-input.is-disabled .el-input__inner,
+.el-date-editor--daterange.is-disabled .el-range-input {
+  color: #606266 !important;
+}
